@@ -1,0 +1,26 @@
+ @Test
+    public void LoginInvalidCredentials() {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.navigate().to("https://www.saucedemo.com/");
+
+        WebElement userNameField = driver.findElement(By.id("user-name"));
+        userNameField.sendKeys("standard_user");
+
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("not_valid");
+
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+
+        WebElement errorMessage = driver.findElement(By.cssSelector("h3[data-test='error']"));
+        Assertions.assertTrue(errorMessage.isDisplayed());
+        System.out.println("Error message is displayed: " + errorMessage.isDisplayed());
+
+        String errorMessageText = errorMessage.getText();
+        String actualErrorMessageTxt = "Epic sadface: Username and password do not match any user in this service";
+        System.out.println("Error message: " + errorMessageText);
+        Assertions.assertEquals(actualErrorMessageTxt, errorMessageText);
+
+    }
+}
