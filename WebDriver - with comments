@@ -1,0 +1,61 @@
+package org.example;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SauceDemo {
+static WebDriver driver;
+
+@BeforeAll
+    public static void setup(){
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.navigate().to ("https://www.saucedemo.com/");
+    }
+
+    @Test
+    public void LoginValidCredentials() {
+       // WebDriverManager.chromedriver().setup();
+       // WebDriver driver = new ChromeDriver();
+        //get will go to given URL
+        //driver.get("https://www.saucedemo.com/");
+
+        // navigate - results sam as GET
+        //driver.navigate().to("https://www.saucedemo.com/");
+
+        //getTitle - title of the page
+        String title = driver.getTitle();
+        System.out.println(title);
+
+        //getCurrentURL
+        String currenturl = driver.getCurrentUrl();
+        System.out.println(currenturl);
+
+        WebElement userNameField = driver.findElement(By.id("user-name"));
+        userNameField.sendKeys("standard_user");
+
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("secret_sauce");
+
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+          loginButton.click();
+
+          //locate cart button
+          WebElement cart = driver.findElement(By.className("shopping_cart_link"));
+        System.out.println("Shopping cart displayed: " + cart.isDisplayed());
+        Assertions.assertTrue(cart.isDisplayed());
+
+
+
+       // WebElement addToCart1 = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
+        //addToCart1.click();
+
+        //driver.quit();
+    }
+}
