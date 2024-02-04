@@ -51,10 +51,11 @@ static WebDriver driver;
         System.out.println("Shopping cart displayed: " + cart.isDisplayed());
         Assertions.assertTrue(cart.isDisplayed());
 
-
-
-       // WebElement addToCart1 = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
+          // WebElement addToCart1 = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
         //addToCart1.click();
+
+        cart.click()
+
 
         //driver.quit();
     }
